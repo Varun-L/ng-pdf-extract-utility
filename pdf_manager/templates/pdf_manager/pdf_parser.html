@@ -7,7 +7,11 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="pdf_file_name">PDF File Name:</label>
-        <input type="text" class="form-control" id="pdf_file_name" name="pdf_file_name" required>
+        <select class="form-control" id="pdf_file_name" name="pdf_file_name" required>
+          {% for pdf_file in pdf_files %}
+            <option value="{{ pdf_file }}">{{ pdf_file }}</option>
+          {% endfor %}
+        </select>
       </div>
       <div class="form-group">
         <label for="page_numbers">Page Numbers (comma-separated):</label>

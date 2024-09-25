@@ -35,6 +35,7 @@ def upload_pdf(request):
     return render(request, 'pdf_manager/upload_pdf.html')
 
 def pdf_parser(request):
+    pdf_files = os.listdir(PDF_STORAGE_DIR)
     if request.method == 'POST':
         pdf_file_name = request.POST.get('pdf_file_name')
         page_numbers = request.POST.get('page_numbers')
@@ -62,7 +63,7 @@ def pdf_parser(request):
                 text += f'\nRect text: {page.get_text("text", clip=rect)}'
 
         return render(request, 'pdf_manager/pdf_parser.html', {'text': text})
-    return render(request, 'pdf_manager/pdf_parser.html')
+    return render(request, 'pdf_manager/pdf_parser.html', {'pdf_files': pdf_files})
 
 def regex_extractor(request):
     if request.method == 'POST':
