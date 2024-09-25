@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Download PDF</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Download</button>
-  </form>
+  <div class="container">
+    <h1 class="text-center">Download PDF</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="url">PDF URL:</label>
+        <input type="url" class="form-control" id="url" name="url" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Download PDF</button>
+    </form>
+    {% if messages %}
+      <div class="alert alert-success">
+        {{ messages }}
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}

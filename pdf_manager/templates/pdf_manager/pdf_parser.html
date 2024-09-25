@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>PDF Parser</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Parse</button>
-  </form>
-  {% if text %}
-    <h2>Extracted Text:</h2>
-    <pre>{{ text }}</pre>
-  {% endif %}
+  <div class="container">
+    <h1 class="text-center">PDF Parser</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="pdf_file_name">PDF File Name:</label>
+        <input type="text" class="form-control" id="pdf_file_name" name="pdf_file_name" required>
+      </div>
+      <div class="form-group">
+        <label for="page_numbers">Page Numbers (comma-separated):</label>
+        <input type="text" class="form-control" id="page_numbers" name="page_numbers">
+      </div>
+      <div class="form-group">
+        <label for="search_string">Search String:</label>
+        <input type="text" class="form-control" id="search_string" name="search_string">
+      </div>
+      <div class="form-group">
+        <label for="rect_coords">Rectangle Coordinates (x1,y1,x2,y2):</label>
+        <input type="text" class="form-control" id="rect_coords" name="rect_coords">
+      </div>
+      <button type="submit" class="btn btn-primary">Parse PDF</button>
+    </form>
+    {% if text %}
+      <h2>Extracted Text:</h2>
+      <pre>{{ text }}</pre>
+    {% endif %}
+  </div>
 {% endblock %}
