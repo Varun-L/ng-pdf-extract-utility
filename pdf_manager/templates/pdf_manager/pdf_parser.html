@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>PDF Parser</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Parse</button>
+  </form>
+  {% if text %}
+    <h2>Extracted Text:</h2>
+    <pre>{{ text }}</pre>
+  {% endif %}
+{% endblock %}

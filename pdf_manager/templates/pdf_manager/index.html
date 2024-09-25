@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Available PDF Files</h1>
+  <ul>
+    {% for pdf_file in pdf_files %}
+      <li>{{ pdf_file.name }} ({{ pdf_file.uploaded_at }})</li>
+    {% empty %}
+      <li>No PDF files available.</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{% url 'download_pdf' %}">Download PDF</a></p>
+{% endblock %}
