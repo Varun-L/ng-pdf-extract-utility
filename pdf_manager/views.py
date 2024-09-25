@@ -3,7 +3,7 @@ import re
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import PdfDownloadForm, PdfParserForm, RegexExtractorForm
-from .models import PdfFile
+# from .models import PdfFile
 import requests
 from django.core.files import File
 from io import BytesIO
@@ -17,7 +17,7 @@ def download_pdf(request):
         form = PdfDownloadForm(request.POST)
         if form.is_valid():
             url = form.cleaned_data['url']
-            response = requests.get(url)
+            response = requests.get(url, verify= False )
             pdf_file = PdfFile(name=url.split('/')[-1], file=File(BytesIO(response.content), name=url.split('/')[-1]))
             pdf_file.save()
             messages.success(request, 'PDF downloaded successfully!')
